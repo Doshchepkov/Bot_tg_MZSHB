@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import random
 
+from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram import Bot, Dispatcher, F, Router
 from aiogram.filters import Command, CommandObject
 from aiogram.fsm.context import FSMContext
@@ -27,7 +28,7 @@ from database import (
     fetchrow,
     fetchval,
 )
-from config import TOKEN, ADMIN_IDS
+from config import TOKEN, ADMIN_IDS, PROXY
 from state import ProfileStates, AdminStates, BroadcastStates, MessageStates
 
 logging.basicConfig(
@@ -1783,7 +1784,6 @@ async def text_handler(message: Message, state: FSMContext):
     await state.set_state(BroadcastStates.waiting_for_photo)
 
 
-
 @router.message(BroadcastStates.waiting_for_photo, F.photo)
 async def photo_handler1(message: Message, state: FSMContext):
     data = await state.get_data()
@@ -1859,7 +1859,10 @@ async def main():
     await ensure_admin_roles()
 
     bot = Bot(token=TOKEN)
-    dp = Dispatcher(storage=MemoryStorage())
+    dp = Dispatcher(
+        storage=MemoryStorage(),
+        session=AiohttpSession(proxy=PROXY) if PROXY else None,
+    )
     dp.include_router(router)
     await dp.start_polling(bot)
 
