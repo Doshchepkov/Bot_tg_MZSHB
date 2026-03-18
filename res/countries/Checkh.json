@@ -1,0 +1,346 @@
+[
+    {
+        "coords": {
+            "lat": "50.0755",
+            "lon": "14.4378"
+        },
+        "district": "Чехия",
+        "name": "Прага",
+        "population": 1300000,
+        "subject": "Прага"
+    },
+
+    {
+        "coords": {
+            "lat": "50.6613",
+            "lon": "14.0429"
+        },
+        "district": "Чехия",
+        "name": "Устец-над-Лабем",
+        "population": 93000,
+        "subject": "Северная Чехия"
+    },
+    {
+        "coords": {
+            "lat": "50.6095",
+            "lon": "13.9136"
+        },
+        "district": "Чехия",
+        "name": "Теплице",
+        "population": 49000,
+        "subject": "Северная Чехия"
+    },
+    {
+        "coords": {
+            "lat": "50.7475",
+            "lon": "14.0416"
+        },
+        "district": "Чехия",
+        "name": "Хомутов",
+        "population": 48000,
+        "subject": "Северная Чехия"
+    },
+
+    {
+        "coords": {
+            "lat": "48.9745",
+            "lon": "14.4802"
+        },
+        "district": "Чехия",
+        "name": "Ческе-Будеёвице",
+        "population": 93900,
+        "subject": "Южная Чехия"
+    },
+    {
+        "coords": {
+            "lat": "48.7677",
+            "lon": "14.4134"
+        },
+        "district": "Чехия",
+        "name": "Писек",
+        "population": 29000,
+        "subject": "Южная Чехия"
+    },
+
+    {
+        "coords": {
+            "lat": "50.2312",
+            "lon": "12.8810"
+        },
+        "district": "Чехия",
+        "name": "Карловы Вары",
+        "population": 48000,
+        "subject": "Западная Чехия"
+    },
+    {
+        "coords": {
+            "lat": "50.2137",
+            "lon": "12.9086"
+        },
+        "district": "Чехия",
+        "name": "Соколов",
+        "population": 29000,
+        "subject": "Западная Чехия"
+    },
+
+    {
+        "coords": {
+            "lat": "49.9343",
+            "lon": "15.7826"
+        },
+        "district": "Чехия",
+        "name": "Пардубице",
+        "population": 90000,
+        "subject": "Пардубице"
+    },
+    {
+        "coords": {
+            "lat": "50.0781",
+            "lon": "15.7353"
+        },
+        "district": "Чехия",
+        "name": "Хрудим",
+        "population": 23000,
+        "subject": "Пардубице"
+    },
+
+    {
+        "coords": {
+            "lat": "50.2092",
+            "lon": "15.8262"
+        },
+        "district": "Чехия",
+        "name": "Градец-Кралове",
+        "population": 95000,
+        "subject": "Градец-Кралове"
+    },
+    {
+        "coords": {
+            "lat": "50.0784",
+            "lon": "15.7342"
+        },
+        "district": "Чехия",
+        "name": "Йичин",
+        "population": 19000,
+        "subject": "Градец-Кралове"
+    },
+
+    {
+        "coords": {
+            "lat": "50.7675",
+            "lon": "15.0582"
+        },
+        "district": "Чехия",
+        "name": "Либерец",
+        "population": 105000,
+        "subject": "Либерец"
+    },
+    {
+        "coords": {
+            "lat": "50.7216",
+            "lon": "14.9803"
+        },
+        "district": "Чехия",
+        "name": "Яблонец-над-Нисой",
+        "population": 46000,
+        "subject": "Либерец"
+    },
+
+    {
+        "coords": {
+            "lat": "49.8343",
+            "lon": "18.2926"
+        },
+        "district": "Чехия",
+        "name": "Острава",
+        "population": 290000,
+        "subject": "Моравия-Силезия"
+    },
+    {
+        "coords": {
+            "lat": "49.7851",
+            "lon": "18.2976"
+        },
+        "district": "Чехия",
+        "name": "Карвина",
+        "population": 62000,
+        "subject": "Моравия-Силезия"
+    },
+    {
+        "coords": {
+            "lat": "49.7260",
+            "lon": "18.0300"
+        },
+        "district": "Чехия",
+        "name": "Frýdek-Místek",
+        "population": 57000,
+        "subject": "Моравия-Силезия"
+    },
+
+    {
+        "coords": {
+            "lat": "49.9343",
+            "lon": "15.7826"
+        },
+        "district": "Чехия",
+        "name": "Пардубице",
+        "population": 90000,
+        "subject": "Пардубице"
+    },
+    {
+        "coords": {
+            "lat": "50.0781",
+            "lon": "15.7353"
+        },
+        "district": "Чехия",
+        "name": "Хрудим",
+        "population": 23000,
+        "subject": "Пардубице"
+    },
+
+    {
+        "coords": {
+            "lat": "49.5650",
+            "lon": "15.5942"
+        },
+        "district": "Чехия",
+        "name": "Йиглава",
+        "population": 51000,
+        "subject": "Височина"
+    },
+    {
+        "coords": {
+            "lat": "49.5667",
+            "lon": "15.6500"
+        },
+        "district": "Чехия",
+        "name": "Havlíčkův Brod",
+        "population": 24000,
+        "subject": "Височина"
+    },
+
+    {
+        "coords": {
+            "lat": "49.2256",
+            "lon": "17.6635"
+        },
+        "district": "Чехия",
+        "name": "Злин",
+        "population": 78000,
+        "subject": "Злин"
+    },
+    {
+        "coords": {
+            "lat": "49.1535",
+            "lon": "17.5265"
+        },
+        "district": "Чехия",
+        "name": "Кромержиж",
+        "population": 28000,
+        "subject": "Злин"
+    },
+
+    {
+        "coords": {
+            "lat": "49.1951",
+            "lon": "16.6068"
+        },
+        "district": "Чехия",
+        "name": "Брно",
+        "population": 380000,
+        "subject": "Южная Моравия"
+    },
+    {
+        "coords": {
+            "lat": "48.8730",
+            "lon": "16.5112"
+        },
+        "district": "Чехия",
+        "name": "Зноймо",
+        "population": 34000,
+        "subject": "Южная Моравия"
+    },
+    {
+        "coords": {
+            "lat": "49.0612",
+            "lon": "16.6295"
+        },
+        "district": "Чехия",
+        "name": "Vyškov",
+        "population": 22000,
+        "subject": "Южная Моравия"
+    },
+
+    {
+        "coords": {
+            "lat": "50.1400",
+            "lon": "14.4778"
+        },
+        "district": "Чехия",
+        "name": "Кладно",
+        "population": 70000,
+        "subject": "Стреднечешский край"
+    },
+    {
+        "coords": {
+            "lat": "50.0652",
+            "lon": "14.5220"
+        },
+        "district": "Чехия",
+        "name": "Колин",
+        "population": 32000,
+        "subject": "Стреднечешский край"
+    },
+    {
+        "coords": {
+            "lat": "50.2632",
+            "lon": "14.7116"
+        },
+        "district": "Чехия",
+        "name": "Млада Болеслав",
+        "population": 45000,
+        "subject": "Стреднечешский край"
+    },
+    {
+        "coords": {
+            "lat": "50.1920",
+            "lon": "14.1300"
+        },
+        "district": "Чехия",
+        "name": "Прага-Запад",
+        "population": 40000,
+        "subject": "Стреднечешский край"
+    },
+
+    {
+        "coords": {
+            "lat": "50.2092",
+            "lon": "15.8262"
+        },
+        "district": "Чехия",
+        "name": "Градец-Кралове",
+        "population": 95000,
+        "subject": "Кралове-Градец"
+    },
+    {
+        "coords": {
+            "lat": "50.2356",
+            "lon": "15.6667"
+        },
+        "district": "Чехия",
+        "name": "Йичин",
+        "population": 19000,
+        "subject": "Кралове-Градец"
+    },
+    {
+        "coords": {
+            "lat": "50.2612",
+            "lon": "15.7520"
+        },
+        "district": "Чехия",
+        "name": "Hradec Králové",
+        "population": 95000,
+        "subject": "Кралове-Градец"
+    }
+]
+

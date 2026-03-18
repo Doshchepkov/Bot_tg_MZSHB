@@ -1,0 +1,10 @@
+.venv
+nginx/
+tests/
+docs/
+letsencrypt/
+.gitignore
+.git/
+.gitmodules
+**/__pycache__
+*.md

@@ -1,0 +1,306 @@
+[
+    {
+        "coords": {
+            "lat": "59.437",
+            "lon": "24.7535"
+        },
+        "district": "Эстония",
+        "name": "Таллин",
+        "population": 437619,
+        "subject": "Харьюмаа"
+    },
+    {
+        "coords": {
+            "lat": "59.4656",
+            "lon": "25.0077"
+        },
+        "district": "Эстония",
+        "name": "Маарду",
+        "population": 16000,
+        "subject": "Харьюмаа"
+    },
+    {
+        "coords": {
+            "lat": "59.3033",
+            "lon": "24.4137"
+        },
+        "district": "Эстония",
+        "name": "Кейла",
+        "population": 9734,
+        "subject": "Харьюмаа"
+    },
+    {
+        "coords": {
+            "lat": "59.3561",
+            "lon": "24.0533"
+        },
+        "district": "Эстония",
+        "name": "Палдиски",
+        "population": 3842,
+        "subject": "Харьюмаа"
+    },
+    {
+        "coords": {
+            "lat": "59.3192",
+            "lon": "24.5523"
+        },
+        "district": "Эстония",
+        "name": "Саэуэ",
+        "population": 5903,
+        "subject": "Харьюмаа"
+    },
+    {
+        "coords": {
+            "lat": "59.5786",
+            "lon": "25.7097"
+        },
+        "district": "Эстония",
+        "name": "Локса",
+        "population": 2589,
+        "subject": "Харьюмаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.8969",
+            "lon": "22.582"
+        },
+        "district": "Эстония",
+        "name": "Кярдла",
+        "population": 3170,
+        "subject": "Хийумаа"
+    },
+
+    {
+        "coords": {
+            "lat": "59.3772",
+            "lon": "27.4316"
+        },
+        "district": "Эстония",
+        "name": "Нарва",
+        "population": 53970,
+        "subject": "Ида-Вирумаа"
+    },
+    {
+        "coords": {
+            "lat": "59.2605",
+            "lon": "27.4134"
+        },
+        "district": "Эстония",
+        "name": "Кохтла-Ярве",
+        "population": 33422,
+        "subject": "Ида-Вирумаа"
+    },
+    {
+        "coords": {
+            "lat": "59.3572",
+            "lon": "27.6094"
+        },
+        "district": "Эстония",
+        "name": "Силламяэ",
+        "population": 12000,
+        "subject": "Ида-Вирумаа"
+    },
+    {
+        "coords": {
+            "lat": "59.2028",
+            "lon": "27.7595"
+        },
+        "district": "Эстония",
+        "name": "Йыхви",
+        "population": 10237,
+        "subject": "Ида-Вирумаа"
+    },
+    {
+        "coords": {
+            "lat": "59.3983",
+            "lon": "27.2847"
+        },
+        "district": "Эстония",
+        "name": "Кивиыли",
+        "population": 5145,
+        "subject": "Ида-Вирумаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.7464",
+            "lon": "26.3959"
+        },
+        "district": "Эстония",
+        "name": "Йыгева",
+        "population": 4900,
+        "subject": "Йыгевамаа"
+    },
+    {
+        "coords": {
+            "lat": "58.7131",
+            "lon": "26.0483"
+        },
+        "district": "Эстония",
+        "name": "Муствеэ",
+        "population": 1400,
+        "subject": "Йыгевамаа"
+    },
+    {
+        "coords": {
+            "lat": "58.8926",
+            "lon": "26.2576"
+        },
+        "district": "Эстония",
+        "name": "Пылтсамаа",
+        "population": 4200,
+        "subject": "Йыгевамаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.7866",
+            "lon": "25.4271"
+        },
+        "district": "Эстония",
+        "name": "Ярва-Яани",
+        "population": 1500,
+        "subject": "Ярвамаа"
+    },
+    {
+        "coords": {
+            "lat": "58.8596",
+            "lon": "25.3327"
+        },
+        "district": "Эстония",
+        "name": "Паиде",
+        "population": 7461,
+        "subject": "Ярвамаа"
+    },
+
+    {
+        "coords": {
+            "lat": "59.0241",
+            "lon": "26.3723"
+        },
+        "district": "Эстония",
+        "name": "Раквере",
+        "population": 14327,
+        "subject": "Ляэне-Вирумаа"
+    },
+    {
+        "coords": {
+            "lat": "59.3017",
+            "lon": "26.4694"
+        },
+        "district": "Эстония",
+        "name": "Виймси",
+        "population": 6264,
+        "subject": "Ляэне-Вирумаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.9581",
+            "lon": "23.6814"
+        },
+        "district": "Эстония",
+        "name": "Лахтси",
+        "population": 1926,
+        "subject": "Ляэнемаа"
+    },
+    {
+        "coords": {
+            "lat": "58.9156",
+            "lon": "23.6829"
+        },
+        "district": "Эстония",
+        "name": "Хаапсалу",
+        "population": 9373,
+        "subject": "Ляэнемаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.0466",
+            "lon": "27.1061"
+        },
+        "district": "Эстония",
+        "name": "Пылва",
+        "population": 4130,
+        "subject": "Пылвамаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.3834",
+            "lon": "24.5354"
+        },
+        "district": "Эстония",
+        "name": "Пярну",
+        "population": 41329,
+        "subject": "Пярнумаа"
+    },
+
+    {
+        "coords": {
+            "lat": "59.0186",
+            "lon": "24.6844"
+        },
+        "district": "Эстония",
+        "name": "Рапла",
+        "population": 6851,
+        "subject": "Рапламаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.2344",
+            "lon": "22.5007"
+        },
+        "district": "Эстония",
+        "name": "Курессааре",
+        "population": 13524,
+        "subject": "Сааремаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.3776",
+            "lon": "26.7304"
+        },
+        "district": "Эстония",
+        "name": "Тарту",
+        "population": 100447,
+        "subject": "Тартумаа"
+    },
+
+    {
+        "coords": {
+            "lat": "57.7841",
+            "lon": "26.1250"
+        },
+        "district": "Эстония",
+        "name": "Валга",
+        "population": 13182,
+        "subject": "Валгамаа"
+    },
+
+    {
+        "coords": {
+            "lat": "58.3469",
+            "lon": "25.5908"
+        },
+        "district": "Эстония",
+        "name": "Вильянди",
+        "population": 17771,
+        "subject": "Вильяндимаа"
+    },
+
+    {
+        "coords": {
+            "lat": "57.8335",
+            "lon": "27.0343"
+        },
+        "district": "Эстония",
+        "name": "Выру",
+        "population": 9486,
+        "subject": "Вырумаа"
+    }
+]

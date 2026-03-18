@@ -1,22 +1,48 @@
 version: '3.8'
 
 services:
-  app:
+  black:
     build: .
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+    env_file: .env-black
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    networks:
-      - app_network
+      - type: bind
+        source: ./logs/black/
+        target: /app/logs
+      - type: bind
+        source: ./res
+        target: /app/res
+
+  nefor:
+    build: .
+    env_file: .env-nefor
+    volumes:
+      - type: bind
+        source: ./logs/nefor/
+        target: /app/logs
+      - type: bind
+        source: ./res
+        target: /app/res
+
+  pg:
+    image: postgis/postgis:16-master
+    container_name: pg
+    command: -p ${DB_PORT}
+    env_file:
+      - .env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./docker/postgres/:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
 
 volumes:
-  pgdata:
-
-networks:
-  app_network:
-    driver: bridge
+  pg-data:

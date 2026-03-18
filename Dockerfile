@@ -1,29 +1,37 @@
-# Используем официальный образ PostgreSQL как базовый
-FROM postgres:13
+# ===== BUILD STAGE =====
+FROM python:3.13-slim as builder
 
-# Устанавливаем необходимые пакеты для вашего скрипта (например, Python и необходимые библиотеки)
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
+WORKDIR /app
 
-# Создаем виртуальное окружение
-RUN python3 -m venv /usr/src/app/venv
+# 1. РЈСЃС‚Р°РЅРѕРІРєР° uv Рё СЃРѕР·РґР°РЅРёРµ РІРёСЂС‚СѓР°Р»СЊРЅРѕРіРѕ РѕРєСЂСѓР¶РµРЅРёСЏ
+RUN pip install --no-cache-dir uv>=0.1.0 && \
+    uv venv /app/.venv
 
-# Устанавливаем Python зависимости в виртуальное окружение
-COPY requirements.txt /usr/src/app/requirements.txt
-RUN /usr/src/app/venv/bin/pip install -r /usr/src/app/requirements.txt
+# 2. РљРѕРїРёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»РѕРІ Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
+COPY pyproject.toml uv.lock ./
+COPY res ./res
 
-# Копируем ваш скрипт в контейнер
-COPY main.py /usr/src/app/main.py
+# 3. РЈСЃС‚Р°РЅРѕРІРєР° Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№ С‡РµСЂРµР· uv РІ РІРёСЂС‚СѓР°Р»СЊРЅРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ
+RUN . /app/.venv/bin/activate && \
+    uv sync --frozen
 
-# Устанавливаем переменные окружения для PostgreSQL
-ENV POSTGRES_USER=myuser
-ENV POSTGRES_PASSWORD=mypassword
-ENV POSTGRES_DB=mydatabase
+# ===== RUNTIME STAGE =====
+FROM python:3.13-slim
 
-# Создаем папку для данных PostgreSQL, если она не создана
-RUN mkdir -p /var/lib/postgresql/data
+WORKDIR /app
 
-# Открываем порт PostgreSQL
-EXPOSE 5432
+# 1. РџРµСЂРµРЅРѕСЃ РІРёСЂС‚СѓР°Р»СЊРЅРѕРµ РѕРєСЂСѓР¶РµРЅРёРµ Рё РєРѕРґ
+COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /app/pyproject.toml /app/pyproject.toml
+COPY src .
 
-# Запускаем PostgreSQL и ваш скрипт
-CMD ["sh", "-c", "docker-entrypoint.sh postgres & /usr/src/app/venv/bin/python /usr/src/app/main.py"]
+# 2. РќР°СЃС‚СЂРѕР№РєР° РѕРєСЂСѓР¶РµРЅРёСЏ
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    PATH="/app/.venv/bin:$PATH" \
+    VIRTUAL_ENV="/app/.venv" \
+    DB_NAME=bot
+
+
+# 3. РўРѕС‡РєР° РІС…РѕРґР°
+CMD ["/bin/bash", "-c", "./.venv/bin/python ./main.py"]
