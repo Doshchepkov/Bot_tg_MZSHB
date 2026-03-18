@@ -1865,4 +1865,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(Bot(token="7377984448:AAENm-8FJ6wpDnOnoR4dcOuPZuncBD30Jd0").delete_webhook())
+    asyncio.run(main())
