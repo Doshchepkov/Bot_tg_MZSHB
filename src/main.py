@@ -1273,6 +1273,7 @@ async def check_subscribtions(
             target_id,
             "Не удается проверить вашу подписку на канал. Проверьте, что бот добавлен как администратор канала.",
         )
+        logger.exception(e)
         return False
 
 
