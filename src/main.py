@@ -28,7 +28,7 @@ from database import (
     fetchrow,
     fetchval,
 )
-from config import TOKEN, ADMIN_IDS, PROXY
+from config import TOKEN, ADMIN_IDS, PROXY, SPONSORS
 from state import ProfileStates, AdminStates, BroadcastStates, MessageStates
 
 logging.basicConfig(
@@ -1200,6 +1200,35 @@ async def get_random_user(user_id: int):
     except Exception as e:
         logger.error(f"Ошибка при получении случайного пользователя: {e}")
         return None
+
+
+async def check_subscribtions(
+    target_id: int, bot: Bot, sponsors_id: list[str] = SPONSORS
+) -> bool:
+    try:
+        # Проверка статуса подписки пользователя на каналы
+        not_subscribed = [
+            sponsor_id
+            for sponsor_id in sponsors_id
+            if (
+                await bot.get_chat_member(chat_id=sponsor_id, user_id=target_id)
+            ).status
+            not in ["member", "administrator", "creator"]
+        ]
+        if not_subscribed:
+            markup = InlineKeyboardMarkup([InlineKeyboardButton(url="")])
+            await bot.send_message(
+                target_id,
+                "Пожалуйста, подпишитесь на эти каналы, прежде чем начать поиск. Спасибо! 😇",
+                reply_markup=markup
+            )
+            return False # Прекращаем выполнение, если не подписан
+    except Exception as e:
+        await bot.send_message(
+            target_id,
+            "Не удается проверить вашу подписку на канал. Проверьте, что бот добавлен как администратор канала.",
+        )
+        return True
 
 
 async def send_random_profile(chat_id: int, requester_id: int, bot: Bot):

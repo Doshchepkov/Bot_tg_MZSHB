@@ -18,3 +18,4 @@ ADMIN_IDS = list(
         )
     )
 )
+SPONSORS = getenv("SPONSORS", "").replace(" ", "").split(",")
