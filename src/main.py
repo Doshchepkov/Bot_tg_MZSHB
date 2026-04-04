@@ -1228,7 +1228,7 @@ async def check_subscribtions(
     user_call_count[target_id] += 1
     if (
         user_subscription_verified[target_id]
-        and user_call_count[target_id] % check_frequency
+        and (user_call_count[target_id] - 1) % check_frequency
     ):
         return True
     try:
