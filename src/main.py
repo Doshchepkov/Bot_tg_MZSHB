@@ -4,12 +4,14 @@ import logging
 import os
 from pathlib import Path
 import random
+from collections import defaultdict
 
 from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram import Bot, Dispatcher, F, Router
 from aiogram.filters import Command, CommandObject
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.types import (
     CallbackQuery,
     InlineKeyboardButton,
@@ -28,7 +30,7 @@ from database import (
     fetchrow,
     fetchval,
 )
-from config import TOKEN, ADMIN_IDS, PROXY, SPONSORS
+from config import TOKEN, ADMIN_IDS, PROXY, SPONSORS, SUB_CHECK_FREQ
 from state import ProfileStates, AdminStates, BroadcastStates, MessageStates
 
 logging.basicConfig(
@@ -134,6 +136,13 @@ async def create_tables():
                 "CONSTRAINT roles FOREIGN KEY (role)"
                 "REFERENCES roles (role_id)"
                 "NOT VALID);"
+            )
+
+            await conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_age ON users (age);"
+            )
+            await conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_sex ON users (sex);"
             )
 
             # таблицы likes
@@ -405,6 +414,8 @@ async def start(message: Message, state: FSMContext):
         await message.answer("Вы уже зарегистрированы. Вот ваша анкета:")
         await show_profile(message)
         return
+    
+    await check_subscribtions(user_id, message.bot)
 
     await message.answer("Введите ваше имя (слитно):")
     await state.set_state(ProfileStates.NAME)
@@ -462,23 +473,22 @@ async def adminstart(message: Message):
         return
 
     await message.answer(
-        "Добро пожаловать в админтул, о Великий.\n"
-        "/stats - статистика\n"
-        "/banlist - список забаненных\n"
-        "/premiumlist - список премиумов\n"
-        "/ban_by_id <id> - забанить по id\n"
-        "/adminsearch - просмотр анкет на бан\n"
-        "/admin - выдать статус админа\n"
-        "/reset - сброс истории событий\n"
-        "/recover - разбан по id\n"
-        "/broadcast - рассылка\n"
-        "/totalunban - разбан всем\n"
-        "/totalban - бан всем, кто не админ\n"
-        "/premium <id> - выдать premium"
+        "Добро пожаловать в админтул, о Великий. У нас из комманд:\n"
+        " /stats - статистика \n"
+        " /banlist - список забаненных \n"
+        " /premiumlist - список премиумов \n"
+        " /ban_by_id (id человека) - забанить по id \n"
+        " /unban10 \n"
+        " /adminsearch - для просмотра анкет на бан; \n"
+        " /admin - для выдачи статуса админа,\n"
+        " /reset - сброс истории событий,\n"
+        " /recover - разбан по id,\n"
+        " /broadcast - реклама \n"
+        " /premium (id человека) - выдача Premium"
     )
 
 
-@router.message(Command("totalunban"))
+@router.message(Command("unban10"))
 async def unban_command(message: Message):
     await unban_all_users()
     await message.answer("Все пользователи с ролью 3 были разбанены.")
@@ -1036,6 +1046,7 @@ async def _search_candidates_by_field(
         SELECT * FROM users
         WHERE {field_name} = $1
         AND telegram_id != $2
+        AND role != 3
         AND telegram_id NOT IN (SELECT liked_id FROM likes WHERE liker_id = $3)
         AND telegram_id NOT IN (SELECT dliked_id FROM dislikes WHERE dliker_id = $4)
         AND telegram_id NOT IN (SELECT reported FROM reports WHERE reporter = $5)
@@ -1157,6 +1168,7 @@ async def get_random_user(user_id: int):
                 query_base = """
                     SELECT * FROM users
                     WHERE telegram_id != $1
+                    AND role != 3
                     AND telegram_id NOT IN (SELECT liked_id FROM likes WHERE liker_id = $2)
                     AND telegram_id NOT IN (SELECT dliked_id FROM dislikes WHERE dliker_id = $3)
                     AND telegram_id NOT IN (SELECT reported FROM reports WHERE reporter = $4)
@@ -1202,36 +1214,68 @@ async def get_random_user(user_id: int):
         return None
 
 
+user_call_count = defaultdict(int)
+user_subscription_verified = defaultdict(bool)
+
+
 async def check_subscribtions(
-    target_id: int, bot: Bot, sponsors_id: list[str] = SPONSORS
+    target_id: int,
+    bot: Bot,
+    *,
+    sponsors_id: list[str] = SPONSORS,
+    check_frequency: int = SUB_CHECK_FREQ,
 ) -> bool:
+    user_call_count[target_id] += 1
+    if (
+        user_subscription_verified[target_id]
+        and user_call_count[target_id] % check_frequency
+    ):
+        return True
     try:
         # Проверка статуса подписки пользователя на каналы
         not_subscribed = [
             sponsor_id
             for sponsor_id in sponsors_id
             if (
-                await bot.get_chat_member(chat_id=sponsor_id, user_id=target_id)
+                await bot.get_chat_member(
+                    chat_id="@" + sponsor_id, user_id=target_id
+                )
             ).status
             not in ["member", "administrator", "creator"]
         ]
         if not_subscribed:
-            markup = InlineKeyboardMarkup([InlineKeyboardButton(url="")])
+            markup = (
+                InlineKeyboardBuilder(
+                    [
+                        InlineKeyboardButton(
+                            text=(await bot.get_chat("@" + chat_id)).full_name,
+                            url=f"t.me/{chat_id}",
+                        )
+                        for chat_id in not_subscribed
+                    ]
+                )
+                .adjust(2)
+                .as_markup()
+            )
             await bot.send_message(
                 target_id,
                 "Пожалуйста, подпишитесь на эти каналы, прежде чем начать поиск. Спасибо! 😇",
-                reply_markup=markup
+                reply_markup=markup,
             )
-            return False # Прекращаем выполнение, если не подписан
+        is_verified = not not_subscribed
+        user_subscription_verified[target_id] = is_verified
+        return is_verified
     except Exception as e:
         await bot.send_message(
             target_id,
             "Не удается проверить вашу подписку на канал. Проверьте, что бот добавлен как администратор канала.",
         )
-        return True
+        return False
 
 
 async def send_random_profile(chat_id: int, requester_id: int, bot: Bot):
+    if not await check_subscribtions(requester_id, bot):
+        return
     user = await get_random_user(requester_id)
 
     if not user:
@@ -1474,10 +1518,22 @@ async def ban(telegram_id: int):
 async def unban_all_users():
     try:
         async with db_conn() as conn:
-            await conn.execute(
-                "UPDATE users SET role = $1 WHERE role = $2", 1, 3
+            conn.execute(
+                """
+                WITH random_banned_users AS (
+                    SELECT telegram_id
+                    FROM users
+                    WHERE role = %s
+                    ORDER BY RANDOM()
+                    LIMIT (SELECT CEIL(COUNT(*) * 0.1) FROM users WHERE role = %s)
+                )
+                UPDATE users
+                SET role = %s
+                WHERE telegram_id IN (SELECT telegram_id FROM random_banned_users);
+            """,
+                (3, 3, 1),
             )
-        logger.info("Все пользователи с ролью 3 были разбанены.")
+        logger.info("10% случайных забаненных пользователей были разбанены.")
     except Exception as e:
         logging.error(f"Ошибка при разбане пользователей: {e}")
 

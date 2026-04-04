@@ -19,3 +19,4 @@ ADMIN_IDS = list(
     )
 )
 SPONSORS = getenv("SPONSORS", "").replace(" ", "").split(",")
+SUB_CHECK_FREQ = int(getenv("SUB_CHECK_FREQ", "10"))
