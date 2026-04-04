@@ -414,7 +414,7 @@ async def start(message: Message, state: FSMContext):
         await message.answer("Вы уже зарегистрированы. Вот ваша анкета:")
         await show_profile(message)
         return
-    
+
     await check_subscribtions(user_id, message.bot)
 
     await message.answer("Введите ваше имя (слитно):")
@@ -1250,11 +1250,15 @@ async def check_subscribtions(
             markup = (
                 InlineKeyboardBuilder(
                     [
-                        InlineKeyboardButton(
-                            text=(await bot.get_chat("@" + chat_id)).full_name,
-                            url=f"t.me/{chat_id}",
-                        )
-                        for chat_id in not_subscribed
+                        [
+                            InlineKeyboardButton(
+                                text=(
+                                    await bot.get_chat("@" + chat_id)
+                                ).full_name,
+                                url=f"t.me/{chat_id}",
+                            )
+                            for chat_id in not_subscribed
+                        ]
                     ]
                 )
                 .adjust(2)
