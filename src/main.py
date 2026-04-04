@@ -1226,12 +1226,12 @@ async def check_subscribtions(
     check_frequency: int = SUB_CHECK_FREQ,
 ) -> bool:
     user_call_count[target_id] += 1
-    logger.info(f"{sponsors_id=}, {user_call_count[target_id]=}")
+    logger.debug(f"{sponsors_id=}, {user_call_count[target_id]=}")
     if (
         user_subscription_verified[target_id]
         and (user_call_count[target_id] - 1) % check_frequency
     ):
-        logger.info("skip")
+        logger.debug("skip")
         return True
     try:
         # Проверка статуса подписки пользователя на каналы
@@ -1245,7 +1245,7 @@ async def check_subscribtions(
             ).status
             not in ["member", "administrator", "creator"]
         ]
-        logger.info(f"{not_subscribed=}")
+        logger.debug(f"{not_subscribed=}")
         if not_subscribed:
             markup = (
                 InlineKeyboardBuilder(
